@@ -1,27 +1,51 @@
 package racingCar.controller;
 
-import static racingCar.view.Output.*;
+import static racingCar.view.Output.printStartMessage;
 
-import racingCar.service.RacingCarsService;
-import racingCar.service.RequestService;
+import racingCar.controller.service.RacingCarsService;
+import racingCar.controller.service.RequestService;
+import racingCar.model.RacingCars;
+import racingCar.model.RoundCount;
 import racingCar.view.Output;
 
 public class GameController {
-	private final RacingCarsService racingCarsService = new RacingCarsService();
+    public final RacingCars cars;
+    public final RoundCount roundCount;
 
-	public void run() {
-		racingCarsService.initiateCars(RequestService.requestNames());
-		racingCarsService.initiateCount(RequestService.requestCount());
-		playGame();
-		endGame();
-	}
+    public GameController() {
+        RacingCarsService carsService = new RacingCarsService();
+        this.cars = carsService.initiateCars(RequestService.requestNames());
+        this.roundCount = carsService.initiateCount(RequestService.requestCount());
+    }
 
-	public void playGame() {
-		printStartMessage();
-		racingCarsService.playGame();
-	}
+    public GameController(String name, int count) {
+        RacingCarsService carsService = new RacingCarsService();
+        this.cars = carsService.initiateCars(name);
+        this.roundCount = carsService.initiateCount(count);
 
-	public void endGame() {
-		Output.printWinner(racingCarsService.getWinnerCars());
-	}
+    }
+
+    public void run() {
+        playGame();
+        endGame();
+    }
+
+    public void playGame() {
+        printStartMessage();
+        goRound();
+        if (roundCount.isFinish()) {
+            return;
+        }
+        playGame();
+    }
+
+    public void goRound() {
+        cars.go();
+        roundCount.minusOne();
+        Output.printRoundResult(cars.get());
+    }
+
+    public void endGame() {
+        Output.printWinner(cars.getSamePositionCars(cars.getMaxPosition()));
+    }
 }
