@@ -36,7 +36,11 @@ public class Cars {
     }
 
     public int getMaxPosition() {
-        return Collections.max(cars).getPosition();
+        ArrayList<Position> positions = new ArrayList<>();
+        for (Car car : cars) {
+            positions.add(car.getPosition());
+        }
+        return Collections.max(positions).get();
     }
 
     public CarsDto getSamePositionCarsDto(int position) {

@@ -3,7 +3,7 @@ package racingCar.domain;
 import java.util.Objects;
 import racingCar.domain.moveStrategy.NumGenerator;
 
-public class Car implements Comparable<Car> {
+public class Car {
     private static final int GO_NUM = 4;
     private final Name name;
     private final Position position;
@@ -20,20 +20,19 @@ public class Car implements Comparable<Car> {
     }
 
     public boolean isThatPosition(int position) {
-        return getPosition() == position;
+        return getPositionNum() == position;
     }
 
     public String getName() {
         return name.toString();
     }
 
-    public int getPosition() {
+    public int getPositionNum() {
         return position.get();
     }
 
-    @Override
-    public int compareTo(Car o) {
-        return Integer.compare(this.getPosition(), o.getPosition());
+    public Position getPosition() {
+        return position;
     }
 
     @Override

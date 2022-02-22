@@ -45,6 +45,7 @@
    - [x]  Comparable을 이용해 getMaxPosition() 생성
    - [x]  car에 position 확인 메소드 생성
    - [x]  정적 팩토리 메소드를 이용해 dto에서 직접 자기 자신을 생성하도록 하기
+   - [x]  position 안에서 Comparable을 사용
 - 2단계 1차 피드백
    - [x]  equals() 메소드에 원시값 비교 제거
    - [x]  getter 내부적으로 필요한 값을 바로 return해 체이닝을 줄임

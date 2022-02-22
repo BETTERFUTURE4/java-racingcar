@@ -20,7 +20,7 @@ public class CarTest {
         car.move(numGenerator);
 
         //then
-        assertThat(car).extracting("position").isEqualTo(0);
+        assertThat(car.getPositionNum()).isEqualTo(0);
     }
 
     @Test
@@ -32,6 +32,6 @@ public class CarTest {
         car.move(numberGenerator);
 
         //then
-        assertThat(car).extracting("position").isEqualTo(1);
+        assertThat(car.getPositionNum()).isEqualTo(1);
     }
 }
